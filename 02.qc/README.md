@@ -17,7 +17,7 @@ comparing to Mouse and Human Adrenal Gland data:
 ![](assets/media/image2.png)
 
 Mouse ovary Fragment length statistics (filtered/deduped BAM) plot only shows one peak in both rep, 
-lack distinct oscillations and are dominated by short fragments; Even though Both TSS enrichment passed 13, 
+lack distinct oscillations and are dominated by short fragments; Even though Both TSS(Transcription start site) enrichment passed 13, 
 the filter reads both passed 25 millions(27.41M - rep1, 72.27M - rep2)
 
 ## Human ovary
@@ -67,3 +67,16 @@ Additionally, both replicates exhibit high TSS enrichment (19.19 in rep1 and 20.
 In addition, both replicates have more than sufficient filtered read depth (364.04M for rep1 and 101.58M for rep2), 
 far exceeding the 25 million guideline. When taken as a whole, these findings show that the human adrenal gland dataset is significantly better than the human ovary dataset.
 
+## Poor Periodicity Discussion
+
+Ovary libraries from both humans and mice exhibited weak periodicity, with short fragments dominating fragment length distributions and lacking the distinct mono-/di-nucleosome oscillation typical of high-quality ATAC-seq libraries[1]. Weaker chromatin or nuclei preservation, increased background from damaged cells or free DNA, over-tagmentation, and potentially lower library complexity are all the possible reasons for this pattern[1][2]. The issue seems to be worse in the human ovary, where rep1 also failed the TSS enrichment threshold(13)[2]. These interpretations are in line with the course QC guidelines, the ATAC-seq technique, and the literature that demonstrates that high background, decreased TSS enrichment, and poor nucleosomal patterning frequently indicate subpar sample quality or excessive transposase[2].
+
+The adrenal gland datasets, on the other hand, demonstrated more TSS enrichment and clearer periodicity, making them comparatively more dependable for further investigation. Nevertheless, since none of the datasets met the suggested NRF standard, suggesting that library complexity was not perfect overall, adrenal gland should still be characterized as comparatively superior rather than ideal[3].
+
+## Reference
+
+[1] J. D. Buenrostro, P. G. Giresi, L. C. Zaba, H. Y. Chang, and W. J. Greenleaf, “Transposition of native chromatin for fast and sensitive epigenomic profiling of open chromatin, DNA-binding proteins and nucleosome position,” Nature Methods, vol. 10, no. 12, pp. 1213–1218, Dec. 2013, doi: 10.1038/nmeth.2688.
+
+[2] M. R. Corces et al., “An improved ATAC-seq protocol reduces background and enables interrogation of frozen tissues,” Nature Methods, vol. 14, no. 10, pp. 959–962, Oct. 2017, doi: 10.1038/nmeth.4396.
+
+[3] ENCODE Project Consortium, “ATAC-seq Data Standards and Processing Pipeline,” ENCODE, accessed Apr. 6, 2026.
