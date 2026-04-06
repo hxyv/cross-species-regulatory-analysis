@@ -85,3 +85,11 @@ Additional scripts may be written in Python, R, or shell as needed, but stable l
 - Organize files directly inside each task folder in whatever simple layout the team finds easiest.
 - Use `08.results/` for polished outputs that are ready for presentation or the final report.
 - The final automated workflow should run Tasks 2 to 5 with a single command on a Linux cluster where required tools are installed.
+
+---
+
+LLM was used for debugging and version control:
+
+[1] OpenAI, “GPT-5.4 Model,” OpenAI API. [Online]. Available: https://developers.openai.com/api/docs/models/gpt-5.4. [Accessed: Apr. 6, 2026].
+
+[2] OpenAI, “Codex,” OpenAI Developers. [Online]. Available: https://developers.openai.com/codex/. [Accessed: Apr. 6, 2026].

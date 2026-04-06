@@ -92,5 +92,3 @@ All final comparison sets are in mouse coordinates.
   `03.mapping/mouse_adrenal_idr_optimal.no_human_mapped_overlap.bed.gz`
 - mapped human-only set:
   `03.mapping/human_adrenal_idr_optimal.HumanToMouse.no_mouse_native_overlap.bed.gz`
-
-*Use Codex to debug and do version control.*
