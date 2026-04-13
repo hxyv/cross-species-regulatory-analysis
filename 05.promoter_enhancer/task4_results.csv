@@ -1,0 +1,11 @@
+Category,Promoters,Enhancers,Pct_Promoters,Pct_Enhancers
+
+Human Total,65958,140807,31.9,68.1
+
+Mouse Total,25790,22473,53.4,46.6
+
+Conserved,26080,9241,73.8,26.2
+
+Human-specific,10687,53068,16.8,83.2
+
+Mouse-specific,5787,14509,28.5,71.5
