@@ -74,6 +74,10 @@ Ovary libraries from both humans and mice exhibited weak periodicity, with short
 
 The adrenal gland datasets, on the other hand, demonstrated more TSS enrichment and clearer periodicity, making them comparatively more dependable for further investigation. Nevertheless, since none of the datasets met the suggested NRF standard, suggesting that library complexity was not perfect overall, adrenal gland should still be characterized as comparatively superior rather than ideal[3].
 
+![](assets/media/table1.png)
+
+![](assets/media/table2.png)
+
 ## Reference
 
 [1] J. D. Buenrostro, P. G. Giresi, L. C. Zaba, H. Y. Chang, and W. J. Greenleaf, “Transposition of native chromatin for fast and sensitive epigenomic profiling of open chromatin, DNA-binding proteins and nucleosome position,” Nature Methods, vol. 10, no. 12, pp. 1213–1218, Dec. 2013, doi: 10.1038/nmeth.2688.
