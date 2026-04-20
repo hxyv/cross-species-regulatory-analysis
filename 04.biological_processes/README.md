@@ -43,9 +43,6 @@ OCR sets were submitted to GREAT using the `submitGreatJob()` function with the 
 - Python with `pandas`, `matplotlib`
 
 ## Figures 
-<img src="results/plots_combined.png" width="100%"/>
-
-<p float="left">
-  <img src="results/plots_human_specific.png" width="48%"/>
-  <img src="results/plots_mouse_specific.png" width="48%"/>
-</p>
+<img src="results/plots_combined.png" width="70%"/>
+<img src="results/plots_human_specific.png" width="70%"/>
+<img src="results/plots_mouse_specific.png" width="70%"/>
