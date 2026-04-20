@@ -4,8 +4,8 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 mapping_dir="${repo_root}/03.mapping"
 
-human_source=/ocean/projects/bio230007p/ikaplow/HumanAtac/AdrenalGland/peak/idr_reproducibility/idr.optimal_peak.narrowPeak.gz
-mouse_source=/ocean/projects/bio230007p/ikaplow/MouseAtac/AdrenalGland/peak/idr_reproducibility/idr.optimal_peak.narrowPeak.gz
+human_source=${HUMAN_PEAKS:-/ocean/projects/bio230007p/ikaplow/HumanAtac/AdrenalGland/peak/idr_reproducibility/idr.optimal_peak.narrowPeak.gz}
+mouse_source=${MOUSE_PEAKS:-/ocean/projects/bio230007p/ikaplow/MouseAtac/AdrenalGland/peak/idr_reproducibility/idr.optimal_peak.narrowPeak.gz}
 
 human_link=${mapping_dir}/human_adrenal_idr_optimal.narrowPeak.gz
 mouse_link=${mapping_dir}/mouse_adrenal_idr_optimal.narrowPeak.gz
