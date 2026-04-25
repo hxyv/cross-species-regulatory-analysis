@@ -226,6 +226,7 @@ Task 4, promoter/enhancer classification:
 ```bash
 cd 05.promoter_enhancer
 bash classifyingpeaks.sh
+bash classifyingpeaks.sh
 ```
 
 Task 5, motif enrichment:
@@ -281,6 +282,7 @@ LLM assistance was used for debugging, documentation, and version-control suppor
 
 [2] OpenAI, “Codex,” OpenAI Developers. [Online]. Available: https://developers.openai.com/codex/. [Accessed: Apr. 6, 2026].
 
+[3] Anthropic, "Claude," Anthropic. [Online]. Available: https://claude.ai. [Accessed: Apr. 2026].
 
 # Citation
 
