@@ -6,7 +6,8 @@ The final downstream workflow focuses on adrenal gland because it was selected a
 
 ## Workflow Overview
 
-![Cross-species regulatory analysis workflow](project_workflow.png)
+<img src="project_workflow.png" alt="Cross-species regulatory analysis workflow" width="500">
+
 
 ## Table of Contents
 
