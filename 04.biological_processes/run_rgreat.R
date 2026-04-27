@@ -1,19 +1,23 @@
-.libPaths(c("/jet/home/dommalap/R/x86_64-redhat-linux-gnu-library/4.4", .libPaths()))
+args <- commandArgs(trailingOnly = TRUE)
+base <- args[1] # project base directory (for outputs and mouse files)
+data_root <- args[2] # path to human .bed.gz files
 
-if (!require("BiocManager", quietly = TRUE)) {
-    install.packages("BiocManager", lib = "/jet/home/dommalap/R/x86_64-redhat-linux-gnu-library/4.4")
+# use a custom R library path via environment variable
+user_lib <- Sys.getenv("R_USER_LIB", unset = NA)
+if (!is.na(user_lib) && nzchar(user_lib)) {
+  .libPaths(c(user_lib, .libPaths()))
 }
 
-if (!require("rGREAT", quietly = TRUE)) {
-    BiocManager::install("rGREAT", ask = FALSE)
-}
-
+# load GREAT analysis 
+# load tools for genomic ranges, GRanges
 library(rGREAT)
 library(GenomicRanges)
 
-dir.create("results", showWarnings = FALSE)
+# output directory for results
+outdir <- file.path(base, "results")
+dir.create(outdir, recursive = TRUE, showWarnings = FALSE)
 
-# Read .bed files
+# read .bed files
 read_bed_simple <- function(file) {
   df <- read.table(file, header = FALSE, sep = "\t")[, 1:3]
   colnames(df) <- c("chr", "start", "end")
@@ -25,13 +29,13 @@ read_bed_simple <- function(file) {
 }
 
 # human using the original hg38 corrdinates 
-human_specific <- read_bed_simple("/ocean/projects/bio230007p/xhu15/cross-species-regulatory-analysis/03.mapping/human_adrenal_idr_optimal.human_specific.original_human_coordinates.bed.gz")
-human_shared <- read_bed_simple("/ocean/projects/bio230007p/xhu15/cross-species-regulatory-analysis/03.mapping/human_adrenal_idr_optimal.shared.original_human_coordinates.bed.gz")
+human_specific <- read_bed_simple(file.path(data_root, "human_adrenal_idr_optimal.human_specific.original_human_coordinates.bed.gz"))
+human_shared <- read_bed_simple(file.path(data_root, "human_adrenal_idr_optimal.shared.original_human_coordinates.bed.gz"))
 all_human <- c(human_specific, human_shared)
 
 # mouse using mm10 coordinates 
-mouse_specific <- read_bed_simple("mouse_adrenal_idr_optimal.no_human_mapped_overlap.bed")
-shared_mouse <- read_bed_simple("mouse_adrenal_idr_optimal.shared_with_human_mapped.bed")
+mouse_specific <- read_bed_simple(file.path(base, "mouse_adrenal_idr_optimal.no_human_mapped_overlap.bed"))
+shared_mouse <- read_bed_simple(file.path(base, "mouse_adrenal_idr_optimal.shared_with_human_mapped.bed"))
 all_mouse <- c(mouse_specific, shared_mouse)
 
 # Run RGreat 
@@ -77,14 +81,14 @@ top_mouse_specific <- summarize_go(res_mouse_specific, "mouse_specific")
 top_shared_mouse <- summarize_go(res_shared_mouse, "shared_mouse")
 top_all_mouse <- summarize_go(res_all_mouse, "all_mouse")
 
-# Save Filetered data
-write.csv(top_human_specific, "results/human_specific_BP_filtered.csv", row.names = FALSE)
-write.csv(top_human_shared, "results/human_shared_BP_filtered.csv", row.names = FALSE)
-write.csv(top_all_human, "results/all_human_BP_filtered.csv", row.names = FALSE)
+# Save filtered data
+write.csv(top_human_specific, file.path(outdir, "human_specific_BP_filtered.csv"), row.names = FALSE)
+write.csv(top_human_shared, file.path(outdir, "human_shared_BP_filtered.csv"), row.names = FALSE)
+write.csv(top_all_human, file.path(outdir, "all_human_BP_filtered.csv"), row.names = FALSE)
 
-write.csv(top_mouse_specific, "results/mouse_specific_BP_filtered.csv", row.names = FALSE)
-write.csv(top_shared_mouse, "results/shared_mouse_BP_filtered.csv", row.names = FALSE)
-write.csv(top_all_mouse, "results/all_mouse_BP_filtered.csv", row.names = FALSE)
+write.csv(top_mouse_specific, file.path(outdir, "mouse_specific_BP_filtered.csv"), row.names = FALSE)
+write.csv(top_shared_mouse, file.path(outdir, "shared_mouse_BP_filtered.csv"), row.names = FALSE)
+write.csv(top_all_mouse, file.path(outdir, "all_mouse_BP_filtered.csv"), row.names = FALSE)
 
 # Completed
 message("Done! Correct species-specific GREAT analysis complete.")

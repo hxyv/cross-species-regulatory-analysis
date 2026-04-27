@@ -273,3 +273,9 @@ tmp/
 !01.data/**/*.md
 !01.data/**/*.yaml
 !01.data/**/*.yml
+results/
+*.bed
+*.bed.gz
+cross-species-regulatory-analysis/
+*.sbatch
+*.narrowPeak

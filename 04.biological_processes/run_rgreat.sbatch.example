@@ -1,0 +1,22 @@
+#!/bin/bash
+#SBATCH -J rgreat_task3
+#SBATCH -p RM-shared
+#SBATCH --account=YOUR_ACCOUNT
+#SBATCH -t 02:00:00
+#SBATCH -N 1
+#SBATCH -c 4
+#SBATCH --mem=8G
+#SBATCH -o logs/out.%j.txt
+#SBATCH -e logs/err.%j.txt
+
+cd $SLURM_SUBMIT_DIR
+source ~/.bashrc
+conda activate base
+
+export LD_LIBRARY_PATH=$HOME:$LD_LIBRARY_PATH
+
+BASE=/path/to/your/project
+DATA_ROOT=/path/to/your/human/bed/files
+SCRIPT=$BASE/04.biological_processes/run_rgreat.R
+
+Rscript $SCRIPT $BASE $DATA_ROOT
