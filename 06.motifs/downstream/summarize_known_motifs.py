@@ -9,7 +9,7 @@ Purpose:
     2. Per-experiment TSV files for detailed downstream use
 
 This script is a "flat summary" — it treats each experiment independently
-and does NOT do cross-experiment comparisons (that's build_integrated_report.py).
+and does NOT do cross-experiment comparisons.
 
 Output files (all in results_summary/):
   - motif_summary_overview.md           : combined Markdown with all 20 experiments
