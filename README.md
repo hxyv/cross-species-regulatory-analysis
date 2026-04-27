@@ -267,6 +267,7 @@ python top10_GO_BP_Plot.py
 
 ```bash
 cd 05.promoter_enhancer
+bash extract_tss.sh
 bash classifyingpeaks.sh
 ```
 
