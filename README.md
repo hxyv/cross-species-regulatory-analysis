@@ -4,14 +4,6 @@ This repository contains a reproducible analysis workflow for the 03-713 Bioinfo
 
 The final downstream workflow focuses on adrenal gland because it was selected after quality control of the assigned adrenal gland and ovary datasets.
 
-## Workflow Overview
-
-<p align="center">
-  <img src="project_workflow.png" alt="Cross-species regulatory analysis workflow" width="500">
-</p>
-
-
-
 ## Table of Contents
 
 - [Cross-Species Regulatory Analysis](#cross-species-regulatory-analysis)
@@ -206,6 +198,11 @@ cp pipeline.conf.example pipeline.conf
 ```
 
 ## Pipeline Overview
+
+<p align="center">
+  <img src="project_workflow.png" alt="Cross-species regulatory analysis workflow" width="500">
+</p>
+
 
 The automated pipeline performs the downstream adrenal analysis in this order:
 
