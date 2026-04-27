@@ -70,10 +70,36 @@ for in_file in "${FILES[@]}"; do
   # Sort by chr/start/end using tab as delimiter
   # For duplicated coordinates, keep row with higher numeric column-5 score
   # Fallback to first row when score is not numeric
-  awk 'BEGIN{FS="[[:space:]]+"; OFS="\t"}
-       NF>=3 && $2 ~ /^[0-9]+$/ && $3 ~ /^[0-9]+$/ && $2 < $3 {print}' "$in_file" \
-    | LC_ALL=C sort -t $'\t' -k1,1 -k2,2n -k3,3n \
-    | awk '
+  # Stage 1 explanation:
+  # The first awk command reads the raw input file.
+  # FS="[[:space:]]+" means input columns may be separated by spaces or tabs.
+  # OFS="\t" means awk prints output columns with tab separators.
+  # NF>=3 requires at least chromosome, start, and end columns.
+  # The two regex checks require start and end to be positive integers.
+  # The $2 < $3 check removes invalid intervals where start is not before end.
+  # Only rows passing all checks are printed into the next pipeline stage.
+  {
+    # Run the input-cleaning awk stage on the current BED-like file.
+    awk 'BEGIN{FS="[[:space:]]+"; OFS="\t"}
+         NF>=3 && $2 ~ /^[0-9]+$/ && $3 ~ /^[0-9]+$/ && $2 < $3 {print}' "$in_file"
+  } \
+    | {
+      # Stage 2: sort cleaned rows by chromosome, then numeric start, then numeric end.
+      LC_ALL=C sort -t $'\t' -k1,1 -k2,2n -k3,3n
+    } \
+    | {
+      # Stage 3 explanation:
+      # The second awk command receives already sorted rows.
+      # Because sorting groups identical chr/start/end records together, duplicates are adjacent.
+      # key is the duplicate-detection key built from columns 1, 2, and 3.
+      # cur_key stores the coordinate group currently being processed.
+      # best_line stores the row that should be kept for the current duplicate group.
+      # best_has_score records whether best_line has a numeric column-5 score.
+      # best_score stores the numeric score of best_line.
+      # When a new coordinate key appears, awk prints the previous group's best_line.
+      # If another row has the same key, awk keeps it only when its score is numeric and higher.
+      # END prints the final group's best_line because no later key exists to trigger printing.
+      awk '
         BEGIN{
           FS=OFS="\t"
           cur_key=""
@@ -111,7 +137,8 @@ for in_file in "${FILES[@]}"; do
         }
         END{
           if (best_line != "") print best_line
-        }' \
+        }'
+    } \
     > "$out_file"
 
   # Simple row counts for logging
