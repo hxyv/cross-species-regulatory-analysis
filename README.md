@@ -75,12 +75,6 @@ Python packages:
 - `pandas`
 - `matplotlib`
 
-Install the Python dependencies with:
-
-```bash
-pip install -r requirements.txt
-```
-
 `requirements.txt` only covers Python packages. HAL/HALPER, HOMER, bedtools, and R/Bioconductor packages should be installed or loaded through the cluster environment.
 
 ## Installation Notes
