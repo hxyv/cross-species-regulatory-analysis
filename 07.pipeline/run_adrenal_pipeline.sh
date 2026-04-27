@@ -97,6 +97,12 @@ require_file "human TSS BED" ${HUMAN_TSS}
 require_file "mouse TSS BED" ${MOUSE_TSS}
 require_dir "HAL binary directory" ${HAL_BIN}
 require_dir "HALPER directory" ${HALPER_DIR}
+
+# Use the default Bridges bedtools module if bedtools is not already on PATH.
+if ! command -v bedtools >/dev/null 2>&1; then
+  module load bedtools/2.30.0 >/dev/null 2>&1 || true
+fi
+
 require_command bash
 require_command awk
 require_command sort

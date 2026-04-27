@@ -1,5 +1,9 @@
 # Motif Enrichment
 
+<p align="center">
+  <img src="assets/task5.png" alt="Cross-species regulatory analysis workflow" width="500">
+</p>
+
 This folder contains Task 5 motif enrichment analyses using HOMER.
 
 Main workflow:
