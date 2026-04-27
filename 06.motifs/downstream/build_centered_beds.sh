@@ -16,6 +16,14 @@
 #                                    summit = start + col10
 #
 #     Summit200:      chr1  [summit-100,  summit+100]          (fixed 200bp)
+# For example:
+# chr1    1000    1500    peak1    500    .    ...    ...    ...    230
+# start = 1000 $2
+# summit_offset = 230 $10
+# summit = start + summit_offset = 1230 ($2 + $10)
+# new_start = summit - 100 = 1130
+# new_end = summit + 100 = 1330
+# chr1    1130    1330    peak1    500    .
 #
 #   Formula applied to each line:
 #     new_start = $2 + $10 - 100      ($2 = start, $10 = summit offset)
