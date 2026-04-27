@@ -5,17 +5,13 @@ Per-experiment HOMER known motif summary
 Purpose:
   Parse knownResults.txt from each of the 20 HOMER experiment directories
   and produce:
-    1. One Markdown overview file with Top 10 tables for every experiment
-    2. Per-experiment TSV files for detailed downstream use
+    One Markdown overview file with Top 10 tables for every experiment
 
 This script is a "flat summary" — it treats each experiment independently
-and does NOT do cross-experiment comparisons (that's build_integrated_report.py).
+and does NOT do cross-experiment comparisons.
 
 Output files (all in results_summary/):
   - motif_summary_overview.md           : combined Markdown with all 20 experiments
-  - <experiment>_top_by_qval.tsv        : Top 10 motifs ranked by q-value
-  - <experiment>_top_by_delta.tsv       : Top 10 motifs ranked by delta_pct
-                                          (only if any pass both filters)
 
 Filters applied:
   - q-value (Benjamini) < 0.05          : FDR-corrected significance
@@ -24,15 +20,10 @@ Filters applied:
 Usage:
   python3 summarize_known_motifs.py
 
-Relationship to build_integrated_report.py:
-  - This script = per-experiment reference / appendix data
-  - build_integrated_report.py = cross-experiment integrated analysis
-  Both should be run; they serve complementary roles.
 """
 
 import os
 import csv
-import sys
 
 #
 # Setup: resolve paths, create output directory
@@ -128,23 +119,6 @@ def parse_known_results(filepath):
                 continue
     return rows
 
-
-#
-# TSV writer
-#
-
-def write_tsv(filepath, rows, fieldnames):
-    """Write a list of dicts to a tab-separated file with a header row."""
-    with open(filepath, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter="\t")
-        writer.writeheader()
-        writer.writerows(rows)
-
-
-# Column order for the per-experiment TSV files
-FIELDS = ["motif", "consensus", "p_value", "log_p_value", "q_value",
-          "target_pct", "bg_pct", "delta_pct"]
-
 #
 # Main loop: process each experiment directory
 #
@@ -179,13 +153,7 @@ for exp_dir in EXPERIMENT_DIRS:
     # This shows the motifs with the largest enrichment difference between
     # target and background. These are the biologically most interesting hits.
     sig_by_delta = sorted(sig_rows, key=lambda r: -r["delta_pct"])[:TOP_N]
-
-    # --- Write per-experiment TSV files ---
-    safe_name = exp_dir.replace("/", "_").replace("\\", "_")
-    write_tsv(os.path.join(OUT_DIR, f"{safe_name}_top_by_qval.tsv"), all_by_qval, FIELDS)
-    if sig_by_delta:
-        write_tsv(os.path.join(OUT_DIR, f"{safe_name}_top_by_delta.tsv"), sig_by_delta, FIELDS)
-
+  
     # --- Append to Markdown overview ---
     overview_lines.append(f"## {exp_dir}")
     overview_lines.append(f"Total motifs tested: {len(rows)}")
@@ -226,7 +194,6 @@ with open(overview_path, "w", encoding="utf-8") as f:
 
 print(f"Done. Summary written to: {OUT_DIR}/")
 print(f"  Overview: motif_summary_overview.md")
-print(f"  Per-experiment TSVs: {len(EXPERIMENT_DIRS)} experiments x 1-2 files each")
 
 # Reference
 # LLM was used for debugging
