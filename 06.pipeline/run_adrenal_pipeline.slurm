@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -N 2
+#SBATCH -N 1
 #SBATCH -p RM-shared
 #SBATCH -t 1-00:00:00
 #SBATCH --job-name=adrenal_pipeline
