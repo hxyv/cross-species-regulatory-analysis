@@ -1,4 +1,4 @@
-# Task 3: GO Biological Process Enrichment Analysis
+# Task 3:GO Biological Process Enrichment Analysis
 
 ## Overview
 This task performs Gene Ontology (GO) Biological Process enrichment analysis on open chromatin regions (OCRs) from human (hg38) and mouse (mm10) adrenal gland ATAC-seq data using the rGREAT package. The results are visualized as bar plots of the top 10 enriched terms by fold enrichment for Shared, Human All, Human Specific Mouse All, and Mouse Specific.
