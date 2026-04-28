@@ -8,7 +8,7 @@
 #SBATCH --error=06.pipeline/run_adrenal_pipeline.%j.err
 #SBATCH --export=ALL
 
-repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+repo_root="${SLURM_SUBMIT_DIR:-$(pwd)}"
 cd "${repo_root}"
 
 bash 06.pipeline/run_adrenal_pipeline.sh "$@"
