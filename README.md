@@ -278,6 +278,8 @@ Check the [pipeline README](https://github.com/BioinformaticsDataPracticum2026/c
 
 The full pipeline script stages the required inputs between task folders before running these commands.
 
+[DEMO](https://youtu.be/4blZrkxj3e0) for the Full Pipeline Usage.
+
 ## Main Outputs
 
 Task 2 outputs:
