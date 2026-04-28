@@ -41,6 +41,7 @@ export HALPER_DIR=${HALPER_DIR:-}
 export HUMAN_TSS=${HUMAN_TSS:-/ocean/projects/bio230007p/ikaplow/HumanGenomeInfo/gencode.v27.annotation.protTranscript.TSSsWithStrand_sorted.bed}
 export MOUSE_TSS=${MOUSE_TSS:-/ocean/projects/bio230007p/ikaplow/MouseGenomeInfo/gencode.vM15.annotation.protTranscript.geneNames_TSSWithStrand_sorted.bed}
 export HOMER_DIR=${HOMER_DIR:-}
+export R_USER_LIB=${R_USER_LIB:-}
 
 require_file() {
   label=$1
@@ -150,7 +151,7 @@ decompress_to_file ${mapping_dir}/mouse_adrenal_idr_optimal.shared_with_human_ma
 if [[ ${run_rgreat} -eq 1 ]]; then
   echo "Task 3: run rGREAT biological process analysis"
   cd ${bp_dir}
-  Rscript run_rgreat.R
+  Rscript run_rgreat.R "${bp_dir}" "${mapping_dir}"
   python top10_GO_BP_Plot.py
 fi
 

@@ -68,7 +68,7 @@ summarize_go <- function(res, label) {
   bp <- get_bp(res)
   bp_sig <- bp[bp$Binom_Adjp_BH < 0.05, ]
   bp_sig <- bp_sig[order(bp_sig$Binom_Fold_Enrichment, decreasing = TRUE), ]
-  bp_sig$set <- label
+  bp_sig$set <- rep(label, nrow(bp_sig))
 
   return(bp_sig)
 }
