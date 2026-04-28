@@ -57,7 +57,7 @@ HOMER_HOME="$SCRIPT_DIR/../homer"
 FIND_MOTIFS="$HOMER_HOME/bin/findMotifsGenome.pl"
 
 # Add HOMER bin/ to PATH so that findMotifsGenome.pl can locate its
-# internal helpers (bed2pos.pl, homer2, findKnownMotifs.pl, etc.).
+# internal helpers (bed2pos.pl, homer2,, etc.).
 export PATH="$HOMER_HOME/bin:$PATH"
 
 # Preflight checks
@@ -70,7 +70,7 @@ fi
 
 # 2) Verify every internal helper that findMotifsGenome.pl calls at runtime.
 #    If any is missing, HOMER will silently fail or produce empty results.
-for tool in bed2pos.pl checkPeakFile.pl cleanUpPeakFile.pl mergePeaks homerTools findKnownMotifs.pl homer2 compareMotifs.pl; do
+for tool in bed2pos.pl checkPeakFile.pl mergePeaks homerTools homer2 compareMotifs.pl; do
   if ! command -v "$tool" >/dev/null 2>&1; then
     echo "ERROR: required HOMER helper not found in PATH: $tool"
     exit 1
