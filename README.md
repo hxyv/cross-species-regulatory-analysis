@@ -41,13 +41,13 @@ The final downstream workflow focuses on adrenal gland because it was selected a
 
 The repository is organized as a numbered workflow. Each folder contains a local README with step-specific details.
 
-- `01.data/`: external data paths and selected input notes.
-- `02.qc/`: quality-control analysis and tissue-selection summary.
-- `03.mapping/`: cross-species mapping with HALPER and `bedtools`.
-- `04.biological_processes/`: rGREAT biological process enrichment.
-- `05.promoter_enhancer/`: promoter/enhancer classification using TSS windows.
-- `06.motifs/`: HOMER motif enrichment and motif summaries.
-- `07.pipeline/`: single-command downstream pipeline for Tasks 2 to 5.
+- `00.data/`: external data paths and selected input notes.
+- `01.qc/`: quality-control analysis and tissue-selection summary.
+- `02.mapping/`: cross-species mapping with HALPER and `bedtools`.
+- `03.biological_processes/`: rGREAT biological process enrichment.
+- `04.promoter_enhancer/`: promoter/enhancer classification using TSS windows.
+- `05.motifs/`: HOMER motif enrichment and motif summaries.
+- `06.pipeline/`: single-command downstream pipeline for Tasks 2 to 5.
 
 ## Dependencies
 
@@ -218,36 +218,36 @@ Tasks 3 to 5 depend on the Task 2 mapping outputs. When the full pipeline is use
 
 ## Usage: Step-by-Step
 
-[Task 2, cross-species mapping:](https://github.com/BioinformaticsDataPracticum2026/cross-species-regulatory-analysis/blob/main/03.mapping/)
+[Task 2, cross-species mapping:](https://github.com/BioinformaticsDataPracticum2026/cross-species-regulatory-analysis/blob/main/02.mapping/)
 
 ```bash
 cp pipeline.conf.example pipeline.conf
-bash 03.mapping/prepare_adrenal_mapping_preprocess.sh
-bash 03.mapping/run_adrenal_halper_mapping.sh
-bash 03.mapping/run_adrenal_bedtools_intersection.sh
-bash 03.mapping/recover_human_coordinate_peak_sets.sh
+bash 02.mapping/prepare_adrenal_mapping_preprocess.sh
+bash 02.mapping/run_adrenal_halper_mapping.sh
+bash 02.mapping/run_adrenal_bedtools_intersection.sh
+bash 02.mapping/recover_human_coordinate_peak_sets.sh
 ```
 
-[Task 3, biological process enrichment:](https://github.com/BioinformaticsDataPracticum2026/cross-species-regulatory-analysis/blob/main/04.biological_processes/)
+[Task 3, biological process enrichment:](https://github.com/BioinformaticsDataPracticum2026/cross-species-regulatory-analysis/blob/main/03.biological_processes/)
 
 ```bash
-cd 04.biological_processes
+cd 03.biological_processes
 Rscript run_rgreat.R
 python top10_GO_BP_Plot.py
 ```
 
-[Task 4, promoter/enhancer classification:](https://github.com/BioinformaticsDataPracticum2026/cross-species-regulatory-analysis/blob/main/05.promoter_enhancer/)
+[Task 4, promoter/enhancer classification:](https://github.com/BioinformaticsDataPracticum2026/cross-species-regulatory-analysis/blob/main/04.promoter_enhancer/)
 
 ```bash
-cd 05.promoter_enhancer
+cd 04.promoter_enhancer
 bash extract_tss.sh
 bash classifyingpeaks.sh
 ```
 
-[Task 5, motif enrichment:](https://github.com/BioinformaticsDataPracticum2026/cross-species-regulatory-analysis/blob/main/06.motifs/)
+[Task 5, motif enrichment:](https://github.com/BioinformaticsDataPracticum2026/cross-species-regulatory-analysis/blob/main/05.motifs/)
 
 ```bash
-cd 06.motifs/downstream
+cd 05.motifs/downstream
 bash build_centered_beds.sh
 bash run_all.sh
 python3 summarize_known_motifs.py
@@ -264,17 +264,17 @@ cp pipeline.conf.example pipeline.conf
 Run with default course-provided adrenal paths:
 
 ```bash
-sbatch 07.pipeline/run_adrenal_pipeline.slurm
+sbatch 06.pipeline/run_adrenal_pipeline.slurm
 ```
 
 Run directly with a config file:
 
 ```bash
-bash 07.pipeline/run_adrenal_pipeline.sh \
+bash 06.pipeline/run_adrenal_pipeline.sh \
   --config pipeline.conf
 ```
 
-Check [Task 7](https://github.com/BioinformaticsDataPracticum2026/cross-species-regulatory-analysis/tree/main/07.pipeline) for details.
+Check the [pipeline README](https://github.com/BioinformaticsDataPracticum2026/cross-species-regulatory-analysis/tree/main/06.pipeline) for details.
 
 The full pipeline script stages the required inputs between task folders before running these commands.
 
@@ -282,28 +282,28 @@ The full pipeline script stages the required inputs between task folders before 
 
 Task 2 outputs:
 
-- `03.mapping/adrenal_human_to_mouse_intersection_summary.tsv`
-- `03.mapping/human_adrenal_idr_optimal.human_specific.original_human_coordinates.bed.gz`
-- `03.mapping/human_adrenal_idr_optimal.shared.original_human_coordinates.bed.gz`
-- `03.mapping/mouse_adrenal_idr_optimal.no_human_mapped_overlap.bed.gz`
-- `03.mapping/mouse_adrenal_idr_optimal.shared_with_human_mapped.bed.gz`
+- `02.mapping/adrenal_human_to_mouse_intersection_summary.tsv`
+- `02.mapping/human_adrenal_idr_optimal.human_specific.original_human_coordinates.bed.gz`
+- `02.mapping/human_adrenal_idr_optimal.shared.original_human_coordinates.bed.gz`
+- `02.mapping/mouse_adrenal_idr_optimal.no_human_mapped_overlap.bed.gz`
+- `02.mapping/mouse_adrenal_idr_optimal.shared_with_human_mapped.bed.gz`
 
 Task 3 outputs:
 
-- `04.biological_processes/results/*_BP_filtered.csv`
-- `04.biological_processes/results/plots_*.png`
+- `03.biological_processes/results/*_BP_filtered.csv`
+- `03.biological_processes/results/plots_*.png`
 
 Task 4 outputs:
 
-- `05.promoter_enhancer/task4_results.csv`
-- `05.promoter_enhancer/figures/`
+- `04.promoter_enhancer/task4_results.csv`
+- `04.promoter_enhancer/figures/`
 
 Task 5 outputs:
 
-- `06.motifs/downstream/out_*/knownResults.txt`
-- `06.motifs/downstream/results_summary/motif_summary_overview.md`
-- `06.motifs/downstream/results_summary/*_top_by_qval.tsv`
-- `06.motifs/downstream/results_summary/*_top_by_delta.tsv`
+- `05.motifs/downstream/out_*/knownResults.txt`
+- `05.motifs/downstream/results_summary/motif_summary_overview.md`
+- `05.motifs/downstream/results_summary/*_top_by_qval.tsv`
+- `05.motifs/downstream/results_summary/*_top_by_delta.tsv`
 
 ## Team
 

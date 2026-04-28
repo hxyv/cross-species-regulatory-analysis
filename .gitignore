@@ -267,12 +267,12 @@ tmp/
 
 # Keep tracked project documents and metadata
 !README.md
-!01.data/**/*.tsv
-!01.data/**/*.csv
-!01.data/**/*.txt
-!01.data/**/*.md
-!01.data/**/*.yaml
-!01.data/**/*.yml
+!00.data/**/*.tsv
+!00.data/**/*.csv
+!00.data/**/*.txt
+!00.data/**/*.md
+!00.data/**/*.yaml
+!00.data/**/*.yml
 results/
 *.bed
 *.bed.gz
