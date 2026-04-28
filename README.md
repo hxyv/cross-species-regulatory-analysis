@@ -48,7 +48,6 @@ The repository is organized as a numbered workflow. Each folder contains a local
 - `05.promoter_enhancer/`: promoter/enhancer classification using TSS windows.
 - `06.motifs/`: HOMER motif enrichment and motif summaries.
 - `07.pipeline/`: single-command downstream pipeline for Tasks 2 to 5.
-- `08.results/`: final polished outputs for the report and presentation.
 
 ## Dependencies
 
