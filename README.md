@@ -217,29 +217,6 @@ The automated pipeline performs the downstream adrenal analysis in this order:
 
 Tasks 3 to 5 depend on the Task 2 mapping outputs. When the full pipeline is used, those dependencies are staged automatically in the correct order. If the workflow is run step-by-step, Task 2 must be completed successfully before downstream tasks are attempted.
 
-## Usage: Full Pipeline
-
-First create a project config file and edit it for your environment:
-
-```bash
-cp pipeline.conf.example pipeline.conf
-```
-
-Run with default course-provided adrenal paths:
-
-```bash
-sbatch 07.pipeline/run_adrenal_pipeline.slurm
-```
-
-Run directly with a config file:
-
-```bash
-bash 07.pipeline/run_adrenal_pipeline.sh \
-  --config pipeline.conf
-```
-
-Check [Task 7](https://github.com/BioinformaticsDataPracticum2026/cross-species-regulatory-analysis/tree/main/07.pipeline) for details.
-
 ## Usage: Step-by-Step
 
 [Task 2, cross-species mapping:](https://github.com/BioinformaticsDataPracticum2026/cross-species-regulatory-analysis/blob/main/03.mapping/)
@@ -276,6 +253,29 @@ bash build_centered_beds.sh
 bash run_all.sh
 python3 summarize_known_motifs.py
 ```
+
+## Usage: Full Pipeline
+
+First create a project config file and edit it for your environment:
+
+```bash
+cp pipeline.conf.example pipeline.conf
+```
+
+Run with default course-provided adrenal paths:
+
+```bash
+sbatch 07.pipeline/run_adrenal_pipeline.slurm
+```
+
+Run directly with a config file:
+
+```bash
+bash 07.pipeline/run_adrenal_pipeline.sh \
+  --config pipeline.conf
+```
+
+Check [Task 7](https://github.com/BioinformaticsDataPracticum2026/cross-species-regulatory-analysis/tree/main/07.pipeline) for details.
 
 The full pipeline script stages the required inputs between task folders before running these commands.
 
